@@ -1,0 +1,1276 @@
+definitions:
+  handler.Response:
+    properties:
+      data: {}
+      description:
+        type: string
+      status:
+        type: integer
+    type: object
+  models.AdditionProduct:
+    properties:
+      created_at:
+        type: string
+      order_id:
+        type: string
+      product_id:
+        type: string
+      thing:
+        type: string
+      thing_price:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Cart:
+    properties:
+      delivery_address:
+        type: string
+      id:
+        type: string
+      payment_method:
+        type: string
+      product_img:
+        type: string
+      product_name:
+        type: string
+      total_price:
+        type: string
+    type: object
+  models.CreateAdditionProduct:
+    properties:
+      product_id:
+        type: string
+      thing:
+        type: string
+      thing_price:
+        type: string
+    type: object
+  models.CreateCart:
+    properties:
+      order_id:
+        type: string
+      product_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.CreateHistoryCurier:
+    properties:
+      curier_id:
+        type: string
+      order_id:
+        type: string
+    type: object
+  models.CreateOrder:
+    properties:
+      curier_id:
+        type: string
+      delivery_address:
+        type: string
+      payment_methon:
+        type: string
+      product_id:
+        type: string
+      status:
+        type: string
+      total_price:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.CurierAuthRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.GetAdditionProductByIdResponse:
+    properties:
+      additions:
+        items:
+          $ref: '#/definitions/models.AdditionProduct'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.GetHistoryUserListResponse:
+    properties:
+      count:
+        type: integer
+      histories:
+        items:
+          $ref: '#/definitions/models.HistoryUser'
+        type: array
+    type: object
+  models.GetListHistoryCurierResponse:
+    properties:
+      count:
+        type: integer
+      histories:
+        items:
+          $ref: '#/definitions/models.HistoryCurier'
+        type: array
+    type: object
+  models.GetListOrderResponse:
+    properties:
+      count:
+        type: integer
+      orders:
+        items:
+          $ref: '#/definitions/models.Order'
+        type: array
+    type: object
+  models.GetProductListResponse:
+    properties:
+      count:
+        type: integer
+      products:
+        items:
+          $ref: '#/definitions/models.Product'
+        type: array
+    type: object
+  models.HistoryCurier:
+    properties:
+      created_at:
+        type: string
+      curierId:
+        type: string
+      delivery_address:
+        type: string
+      id:
+        type: string
+      payment_method:
+        type: string
+      status:
+        type: string
+      total_price:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.HistoryUser:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      order_id:
+        type: string
+      product_id:
+        type: string
+      product_img:
+        type: string
+      product_name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Order:
+    properties:
+      created_at:
+        type: string
+      curier_id:
+        type: string
+      delivery_address:
+        type: string
+      id:
+        type: string
+      payment_methon:
+        type: string
+      product_id:
+        type: string
+      status:
+        type: string
+      total_price:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.Product:
+    properties:
+      comment:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
+      product_img:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.UpdateOrder:
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+    type: object
+  models.UpdateProduct:
+    properties:
+      comment:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
+      product_img:
+        type: string
+    type: object
+  models.UserAuthRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /addition-product:
+    post:
+      consumes:
+      - application/json
+      description: Create AdditionProduct
+      operationId: create_addition_product
+      parameters:
+      - description: CreateAdditionProductBody
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateAdditionProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ProductBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Create AdditionProduct
+      tags:
+      - AdditionProduct
+  /addition-product/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get AdditionProduct  By ID
+      operationId: get_addtion_product_by_id
+      parameters:
+      - description: product_id
+        in: path
+        name: product_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: AdditionProductBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.GetAdditionProductByIdResponse'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get AdditionProduct  By ID
+      tags:
+      - Product
+  /cart:
+    post:
+      consumes:
+      - application/json
+      description: Create Cart
+      operationId: create_cart
+      parameters:
+      - description: CreateCartBody
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateCart'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: CartBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Create Cart
+      tags:
+      - Cart
+  /cart/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Cart
+      operationId: delete_cart
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: DeleteCartResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Delete Cart
+      tags:
+      - Cart
+    get:
+      consumes:
+      - application/json
+      description: Get By Id Cart
+      operationId: get_by_id_cart
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetByIDCartResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Cart'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get By Id Cart
+      tags:
+      - Cart
+  /history-curier:
+    get:
+      consumes:
+      - application/json
+      description: Get List HistoryCurier
+      operationId: get_list_history_curier
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: number
+      - description: offset
+        in: query
+        name: offset
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetListHistoryCurierResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.GetListHistoryCurierResponse'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get List HistoryCurier
+      tags:
+      - HistoryCurier
+    post:
+      consumes:
+      - application/json
+      description: Create HistoryCurier
+      operationId: create_history_curier
+      parameters:
+      - description: CreateHistoryCurierBody
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateHistoryCurier'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: HistoryCurierBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.HistoryCurier'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Create HistoryCurier
+      tags:
+      - HistoryCurier
+  /history-curier/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get By Id HistoryCurier
+      operationId: get_by_id_history_curier
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetByIDHistoryCurierResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.HistoryCurier'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get By Id HistoryCurier
+      tags:
+      - HistoryCurier
+  /history-user:
+    get:
+      consumes:
+      - application/json
+      description: Get List HistoryUser
+      operationId: get_list_history_user
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: number
+      - description: offset
+        in: query
+        name: offset
+        type: number
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetHistoryUserListResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.GetHistoryUserListResponse'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get List HistoryUser
+      tags:
+      - User
+  /history-user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get By Id HistoryUser
+      operationId: get_by_id_history_user
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetByIDHistoryUserResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.HistoryUser'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get By Id HistoryUser
+      tags:
+      - User
+  /login-curier:
+    post:
+      consumes:
+      - application/json
+      description: login
+      operationId: login-curier
+      parameters:
+      - description: LoginCurierRequestBody
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.CurierAuthRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Token
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: login
+      tags:
+      - Curier
+  /login-user:
+    post:
+      consumes:
+      - application/json
+      description: login
+      operationId: login-user
+      parameters:
+      - description: LoginUserRequestBody
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserAuthRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Token
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: login
+      tags:
+      - User
+  /order:
+    get:
+      consumes:
+      - application/json
+      description: Get List Order
+      operationId: get_list_order
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: number
+      - description: offset
+        in: query
+        name: offset
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetListOrderResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.GetListOrderResponse'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get List Order
+      tags:
+      - Order
+    post:
+      consumes:
+      - application/json
+      description: Create Order
+      operationId: create_order
+      parameters:
+      - description: CreateOrderBody
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateOrder'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OrderBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Order'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Create Order
+      tags:
+      - Order
+  /order/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get By Id Order
+      operationId: get_by_id_order
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetByIDOrderResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Order'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get By Id Order
+      tags:
+      - Order
+    put:
+      consumes:
+      - application/json
+      description: Update Order
+      operationId: update_order
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UpdateOrderRequestBody
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateOrder'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Order
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.UpdateOrder'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Update Order
+      tags:
+      - UpdateOrder
+  /order/user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get By Id Order User
+      operationId: get_by_id_order_user
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetByIDOrderResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Order'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get By Id Order User
+      tags:
+      - Order
+  /product:
+    get:
+      consumes:
+      - application/json
+      description: Get List Product
+      operationId: get_list_product
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: number
+      - description: offset
+        in: query
+        name: offset
+        type: number
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetListProductResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.GetProductListResponse'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get List Product
+      tags:
+      - Product
+    post:
+      consumes:
+      - multipart/form-data
+      description: Create Product
+      operationId: create_product
+      parameters:
+      - description: Name
+        in: formData
+        name: name
+        required: true
+        type: file
+      - description: Comment
+        in: formData
+        name: comment
+        required: true
+        type: string
+      - description: Price
+        in: formData
+        name: price
+        required: true
+        type: string
+      - description: Upload file
+        in: formData
+        name: file
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ProductBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Product'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Create Product
+      tags:
+      - Product
+  /product/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Product
+      operationId: delete_product
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: DeleteProductResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Product'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Delete Product
+      tags:
+      - Product
+    get:
+      consumes:
+      - application/json
+      description: Get By Id Product
+      operationId: get_by_id_product
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetByIDProductResponseBody
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Product'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Get By Id Product
+      tags:
+      - Product
+    put:
+      consumes:
+      - application/json
+      description: Update Product
+      operationId: update_product
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UpdateProductRequestBody
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Product
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.UpdateProduct'
+              type: object
+        "400":
+          description: Invalid Argument
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Update Product
+      tags:
+      - UpdateProduct
+swagger: "2.0"
